@@ -12,7 +12,11 @@
 		base-package="com.aop.repo,com.aop.service,com.aop.aspects">
 	</context:component-scan>
 	<aop:config>
-		<aop:aspect ref="methodAccessAscept"></aop:aspect>
+
+	<aop:aspect ref="methodAccessAscept">
+		<aop:around method="aroundInvocation"
+			pointcut="execution(public void com.aop.service.DemoService.voidMethodWithoutArgument()))" />
+	</aop:aspect>
 	</aop:config>
 	<bean id="methodAccessAscept"
 		class="com.aop.aspects.MethodAccessAspects">

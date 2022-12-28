@@ -2,6 +2,7 @@ package com.aop.service;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aop.dto.Classes;
@@ -13,7 +14,9 @@ import com.aop.repo.StudentRepo;
 @Service
 public class RegistrationService {
 	
+	@Autowired
 	private StudentRepo studentRepo;
+	@Autowired
 	private RegistrationRepo registraionRepo;
 	
 	public Registration register(Classes classes,Student student,LocalDate registDate) {
