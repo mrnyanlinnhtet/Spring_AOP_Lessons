@@ -14,6 +14,6 @@ public class DemoServiceTest {
 	 
 	 @Test
 	 void withoutArgTest() {
-		 demoService.voidMethodWithoutArgument();
+		 demoService.dividedBy(10,0);
 	 }
 }

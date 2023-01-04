@@ -11,12 +11,24 @@
 	<context:component-scan
 		base-package="com.aop.repo,com.aop.service,com.aop.aspects">
 	</context:component-scan>
-	<aop:config>
+	<aop:config proxy-target-class="true">
 
-	<aop:aspect ref="methodAccessAscept">
-		<aop:around method="aroundInvocation"
-			pointcut="execution(public void com.aop.service.DemoService.voidMethodWithoutArgument()))" />
-	</aop:aspect>
+
+		<aop:aspect ref="methodAccessAscept">
+			<aop:pointcut
+				expression="execution(public void com.aop.service.*.*(..)) and args(names)"
+				id="pointDoBusiness" />
+
+			<aop:before method="beforeExecution"
+				pointcut-ref="pointDoBusiness" arg-names="names" />
+
+			<aop:after method="afterExecution" arg-names="names"
+				pointcut-ref="pointDoBusiness" />
+			<aop:after-returning method="afterReturning"
+				returning="student" pointcut="execution(* getStudent())" />
+			<aop:after-throwing method="afterThrowing"
+				pointcut="execution(* dividedBy(..))" throwing="e" />
+		</aop:aspect>
 	</aop:config>
 	<bean id="methodAccessAscept"
 		class="com.aop.aspects.MethodAccessAspects">
