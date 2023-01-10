@@ -11,15 +11,14 @@
 
 	<context:component-scan
 		base-package="com.pointcut.demo"></context:component-scan>
-	<bean id="asceptBean"
-		class="com.pointcut.demo.utils.aspects.DemoAscept">
+	<bean id="beforeAdvisor"
+		class="com.pointcut.demo.utils.aspects.BeforeLoggerAdvisor">
 	</bean>
 	<aop:config proxy-target-class="true">
-		<aop:pointcut expression="within(com.pointcut.demo..*)"
+		<aop:pointcut
+			expression="@within(com.pointcut.demo.utils.BeforeLogger)"
 			id="adminServiceMethods" />
-		<aop:aspect id="adminServieConfig" ref="asceptBean">
-			<aop:before method="beforeExecution"
-				pointcut-ref="adminServiceMethods" />
-		</aop:aspect>
+		<aop:advisor advice-ref="beforeAdvisor" pointcut-ref="adminServiceMethods"/>
 	</aop:config>
+	
 </beans>
